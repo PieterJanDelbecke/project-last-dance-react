@@ -12,17 +12,35 @@ const Container = styled.div`
 	width: 100vw;
 	height: 100vh;
 `;
-const NavBar = styled.div``;
-const LeftPane = styled.div``;
-const CenterPane = styled.div``;
+const NavBar = styled.div`
+  grid-column: 1 /span 12;
+  grid-row: 1/span 1;
+  background-color: orange;
+`;
+const LeftPane = styled.div`
+  grid-column: 1/ span 2;
+  grid-row: 2/span 5;
+  background-color: green;
+`;
+const CenterPane = styled.div`
+  grid-column: 3/span 8;
+  grid-row: 2/ span 5;
+  background-color: red;
+`;
 
-const RightPane = styled.div``;
+const RightPane = styled.div`
+  grid-column: 11/ span 2;
+  grid-row: 2/span 5;
+  background-color: blue;
+`;
 
 const Home = () => {
 	return (
 		<Container>
 			<NavBar />
-			Hello World
+      <LeftPane />
+      <CenterPane/>
+      <RightPane />
 		</Container>
 	);
 };
