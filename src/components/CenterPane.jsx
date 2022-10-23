@@ -7,10 +7,71 @@ const Container = styled.div`
 	background-color: lightseagreen;
 `;
 
-const CenterPane = () => {
-  return (
-    <Container>CenterPane</Container>
-  )
-}
+const CenterContainer = styled.div`
+	box-sizing: border-box;
+	margin-inline: auto;
+	width: 60%;
+	height: 100%;
+	border: 3px solid red;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 12px;
+`;
 
-export default CenterPane
+const Element = styled.div`
+	width: 300px;
+	height: 100px;
+	background-color: ${(props) => props.color};
+`;
+
+const CenterPane = () => {
+    const rows = new Map();
+    const [rowsArray, setRowsArray] = useState([])
+
+	const initialRows = [
+		{ name: "one", info: { order: 1, color: "yellow" } },
+		{ name: "two", info: { order: 2, color: "green" } },
+		{ name: "three", info: { order: 3, color: "red" } },
+		{ name: "four", info: { order: 4, color: "blue" } },
+	];
+
+	useEffect(() => {
+		for (let row of initialRows) {
+			rows.set(row.name, row.info);
+		}
+        console.log("rows MAP",rows)
+        console.log("rows ARRAY",[...rows])
+		setRowsArray([...rows]);
+	}, []);
+
+	const handleDrag = () => {
+		console.log("DRAGGING");
+	};
+
+	const handleDrop = () => {
+		console.log("DROPPING");
+	};
+
+	const handleDragOver = () => {
+		console.log("DRAGGING OVER");
+	};
+
+	return (
+		<>
+			<Container>
+				<CenterContainer>
+                    {rowsArray.map(row => (
+                        <Element key={row[0]} color={row[1].color}>
+                            {row[0]}
+                        </Element>
+                    ))}
+                </CenterContainer>
+			</Container>
+			;
+		</>
+	);
+};
+
+export default CenterPane;
