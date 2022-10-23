@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
+import { v4 as uuidv4 } from "uuid";
 
 const Container = styled.div`
 	padding: 12px;
@@ -31,8 +32,15 @@ const BottomBox = styled.div`
 `;
 
 const LeftPane = () => {
+	const inputForms = [
+		{ name: "First Name", id: uuidv4() },
+		{ name: "Last Name", id: uuidv4() },
+		{ name: "Phone", id: uuidv4() },
+		{ name: "Email", id: uuidv4() },
+	];
+
 	const handleSubmit = (e) => {
-        e.preventDefault()
+		e.preventDefault();
 		console.log("SUBMITTED");
 		const formData = new FormData(e.target);
 		console.log([...formData.entries()]);
@@ -42,15 +50,14 @@ const LeftPane = () => {
 			<Container>
 				<TopBox>Top</TopBox>
 				<MiddleBox onSubmit={handleSubmit}>
-					<label htmlFor="firstName">First Name</label>
-					<input type="text" name="FirstName" id="firstName" />
-					<label htmlFor="LastName">Last Name</label>
-					<input type="text" name="LastName" id="lastName" />
-					<label htmlFor="phone">Phone</label>
-					<input type="text" name="Phone" id="phone" />
-					<label htmlFor="email">Email</label>
-					<input type="text" name="Email" id="email" />
-                    <button type="submit">Submit</button>
+					{inputForms.map((form) => (
+						<>
+							<label htmlFor={form.id}>{form.name}</label>
+							<input type="text" name={form.name} id={form.id} />
+						</>
+					))}
+
+					<button type="submit">Submit</button>
 				</MiddleBox>
 				<BottomBox>Bottom</BottomBox>
 			</Container>
