@@ -3,6 +3,8 @@ import styled from "@emotion/styled";
 import { grid } from "../styles/theme";
 
 import CenterPane from "./CenterPane";
+import LeftPane from "./LeftPane";
+
 const Container = styled.div`
 	display: grid;
 	grid-template-columns: repeat(12, 1fr);
@@ -17,11 +19,6 @@ const NavBar = styled.div`
 	grid-column: 1 / span 12;
 	grid-row: 1 / span 1;
 	background-color: orange;
-`;
-const LeftPane = styled.div`
-	grid-column: 1 / span 3;
-	grid-row: 2 / span 5;
-	background-color: green;
 `;
 
 const RightPane = styled.div`

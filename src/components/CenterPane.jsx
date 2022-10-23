@@ -29,6 +29,8 @@ const Element = styled.div`
 const CenterPane = () => {
     const rows = new Map();
     const [rowsArray, setRowsArray] = useState([])
+    const [origin, setOrigin] = useState("")
+    const [destination, setDestination] =  useState("")
 
 	const initialRows = [
 		{ name: "one", info: { order: 1, color: "yellow" } },
@@ -46,12 +48,13 @@ const CenterPane = () => {
 		setRowsArray([...rows]);
 	}, []);
 
-	const handleDrag = () => {
-		console.log("DRAGGING");
+	const handleDrag = (name) => {
+		// console.log("DRAGGING element => ", name);
+        setOrigin(name)
 	};
 
-	const handleDrop = () => {
-		console.log("DROPPING");
+	const handleDrop = (name) => {
+		console.log("DROPPING element => ", name);
 	};
 
 	const handleDragOver = () => {
@@ -63,7 +66,7 @@ const CenterPane = () => {
 			<Container>
 				<CenterContainer>
                     {rowsArray.map(row => (
-                        <Element key={row[0]} color={row[1].color}>
+                        <Element draggable key={row[0]} color={row[1].color} onDrag={()=> handleDrag(row[0])} onDragOver={()=> handleDragOver(row[0])} onDrop={handleDrop}>
                             {row[0]}
                         </Element>
                     ))}
