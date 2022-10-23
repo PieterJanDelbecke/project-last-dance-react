@@ -31,6 +31,14 @@ const BottomBox = styled.div`
 	height: 2rem;
 `;
 
+const InputDiv = styled.div`
+	height: 3rem;
+	/* border: 1px solid red; */
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+`;
+
 const LeftPane = () => {
 	const inputForms = [
 		{ name: "First Name", id: uuidv4() },
@@ -45,16 +53,24 @@ const LeftPane = () => {
 		const formData = new FormData(e.target);
 		console.log([...formData.entries()]);
 	};
+
+	const handleOnFocus = () => {
+		console.log("FOCUS");
+	};
+
+	const handleOnBlur = () => {
+		console.log("BLUR");
+	};
 	return (
 		<>
 			<Container>
 				<TopBox>Top</TopBox>
 				<MiddleBox onSubmit={handleSubmit}>
 					{inputForms.map((form) => (
-						<>
+						<InputDiv>
 							<label htmlFor={form.id}>{form.name}</label>
-							<input type="text" name={form.name} id={form.id} />
-						</>
+							<input type="text" name={form.name} id={form.id} onFocus={handleOnFocus} onBlur={handleOnBlur} />
+						</InputDiv>
 					))}
 
 					<button type="submit">Submit</button>
